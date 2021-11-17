@@ -1,0 +1,27 @@
+openapi: 3.0.3
+
+info:
+  title: Social App
+  description: Social App informations
+  version: 1.0.0
+  contact:
+    name: Santhosh
+    email: support@app-city.co
+
+servers:
+  - url: http://localhost:5000/api/v1
+    description: Local Development Environment
+  - url: https://api.express-swagger.com/api/v1
+    description: Production Environment
+
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths: /facebook

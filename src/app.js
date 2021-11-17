@@ -1,6 +1,7 @@
 const express = require("express");
 const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("../swagger.json");
+YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
 
 const app = express();
 const port = process.env.port || 5000;
@@ -8,6 +9,8 @@ const port = process.env.port || 5000;
 const { API_ROUTE } = require("./constants");
 //Data
 const { MOCK_FB_DATA, MOCK_LN_DATA, MOCK_IN_DATA } = require("./data");
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res, next) => {
   res.send("API v1");
