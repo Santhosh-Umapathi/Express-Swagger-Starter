@@ -24,4 +24,93 @@ components:
       scheme: bearer
       bearerFormat: JWT
 
-paths: /facebook
+paths:
+  /facebook:
+    get:
+      summary: Get values of facebook user info.
+      responses:
+        "200":
+          description: Success, returns the object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  followers:
+                    type: string
+                  follows:
+                    type: string
+
+    post:
+      summary: Inserts values of facebook user info.
+      responses:
+        "200":
+          description: Success, returns the object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  followers:
+                    type: string
+                  follows:
+                    type: string
+
+  /instagram:
+    get:
+      summary: Get values of instagram user info.
+      responses:
+        "200":
+          description: Success, returns the object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  followers:
+                    type: string
+                  follows:
+                    type: string
+
+    post:
+      summary: Inserts values of instagram user info.
+      responses:
+        "200":
+          description: Success, returns the object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  followers:
+                    type: string
+                  follows:
+                    type: string
+
+  /{token}:
+    get:
+      summary: Passing values in url
+      parameters:
+        - name: token
+          default: test
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns the entered token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
