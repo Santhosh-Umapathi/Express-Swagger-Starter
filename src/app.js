@@ -14,20 +14,24 @@ app.get("/", (req, res, next) => {
 });
 
 app.get(`${API_ROUTE}/facebook`, (req, res, next) => {
-  res.status(200).send(MOCK_FB_DATA);
+  res.status(200).json(MOCK_FB_DATA);
 });
 
 app.get(`${API_ROUTE}/instagram`, (req, res, next) => {
-  res.status(200).send(MOCK_IN_DATA);
+  res.status(200).json(MOCK_IN_DATA);
 });
 
 app.get(`${API_ROUTE}/linkedin`, (req, res, next) => {
-  res.status(200).send(MOCK_LN_DATA);
+  res.status(200).json(MOCK_LN_DATA);
 });
 
 app.get(`${API_ROUTE}/:id`, (req, res, next) => {
   const param = req.params.id;
-  res.status(200).send(param);
+  res.status(200).json(param);
+});
+
+app.get(`/*`, (req, res, next) => {
+  res.status(400).send("Route not supported");
 });
 
 app.listen(port, () => console.log("Listening to port:", port));
