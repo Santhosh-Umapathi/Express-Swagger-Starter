@@ -237,6 +237,29 @@ paths:
                   device:
                     type: string
 
+  /courseupload:
+    post:
+      tags:
+        - Course
+      summary: Upload images
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                uploadFile:
+                  type: string
+                  format: binary
+
+      responses:
+        200:
+          description: Success, returns the boolean
+          content:
+            application/json:
+              schema:
+                type: boolean
+
   /{token}:
     get:
       summary: Passing values in url
