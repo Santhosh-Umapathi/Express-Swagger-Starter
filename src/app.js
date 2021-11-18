@@ -43,6 +43,13 @@ app.post(`${API_ROUTE}/course`, (req, res, next) => {
   res.status(200).json(MOCK_COURSE_DATA);
 });
 
+app.get(`${API_ROUTE}/coursequery`, (req, res, next) => {
+  const location = req.query.location;
+  const device = req.query.device;
+
+  res.status(200).json({ location, device });
+});
+
 app.get(`${API_ROUTE}/:id`, (req, res, next) => {
   const param = req.params.id;
   res.status(200).json(param);

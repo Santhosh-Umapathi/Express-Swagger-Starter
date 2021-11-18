@@ -202,6 +202,41 @@ paths:
                     price:
                       type: number
 
+  /coursequery:
+    get:
+      tags:
+        - Course
+      summary: Get course info
+      parameters:
+        - name: device
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [web, mobile]
+            default: web
+
+        - name: location
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [italy, USA]
+            default: USA
+
+      responses:
+        200:
+          description: Success, returns the object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                  device:
+                    type: string
+
   /{token}:
     get:
       summary: Passing values in url
