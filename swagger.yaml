@@ -141,6 +141,8 @@ paths:
             application/json:
               schema:
                 type: object
+                example:
+                  { username: "test", followers: "test", follows:' test' }
                 properties:
                   username:
                     type: string
@@ -154,7 +156,7 @@ paths:
         - LinkedIn
       summary: Inserts values of linkedIn user info.
       responses:
-        "200":
+        200:
           description: Success, returns the object
           content:
             application/json:
@@ -167,6 +169,38 @@ paths:
                     type: string
                   follows:
                     type: string
+
+  /course:
+    post:
+      tags:
+        - Course
+      summary: Adds new course Courses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+
+      responses:
+        200:
+          description: Success, returns the array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    price:
+                      type: number
 
   /{token}:
     get:
@@ -187,3 +221,25 @@ paths:
                 properties:
                   token:
                     type: string
+
+  /array:
+    get:
+      tags:
+        - Array
+      summary: Array example.
+      responses:
+        "200":
+          description: Success, returns the array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    followers:
+                      type: string
+                    follows:
+                      type: string

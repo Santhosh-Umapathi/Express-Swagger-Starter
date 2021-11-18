@@ -19,8 +19,16 @@ const MOCK_LN_DATA = {
   date: new Date(Date.now()).toDateString(),
 };
 
+const MOCK_COURSE_DATA = [
+  {
+    name: "React",
+    price: 200,
+  },
+];
+
 module.exports = {
   MOCK_FB_DATA,
   MOCK_IN_DATA,
   MOCK_LN_DATA,
+  MOCK_COURSE_DATA,
 };

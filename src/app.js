@@ -8,7 +8,14 @@ const port = process.env.port || 5000;
 //Constants
 const { API_ROUTE } = require("./constants");
 //Data
-const { MOCK_FB_DATA, MOCK_LN_DATA, MOCK_IN_DATA } = require("./data");
+const {
+  MOCK_FB_DATA,
+  MOCK_LN_DATA,
+  MOCK_IN_DATA,
+  MOCK_COURSE_DATA,
+} = require("./data");
+
+app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -26,6 +33,14 @@ app.get(`${API_ROUTE}/instagram`, (req, res, next) => {
 
 app.get(`${API_ROUTE}/linkedin`, (req, res, next) => {
   res.status(200).json(MOCK_LN_DATA);
+});
+
+app.post(`${API_ROUTE}/course`, (req, res, next) => {
+  const course = req.body;
+
+  MOCK_COURSE_DATA.push(course);
+
+  res.status(200).json(MOCK_COURSE_DATA);
 });
 
 app.get(`${API_ROUTE}/:id`, (req, res, next) => {
