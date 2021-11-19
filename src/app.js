@@ -6,6 +6,7 @@ YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger.yaml");
 
 const app = express();
+app.set("view engine", "ejs");
 const port = process.env.port || 5000;
 //Constants
 const { API_ROUTE } = require("./constants");
@@ -18,6 +19,8 @@ const {
 } = require("./data");
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(fileUpload());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -62,6 +65,19 @@ app.post(`${API_ROUTE}/courseupload`, (req, res, next) => {
     console.log("🚀 --- file.mv --- err", err);
     res.send(true);
   });
+});
+
+app.get(`${API_ROUTE}/form`, (req, res, next) => {
+  console.log("request", req.body, req.query);
+  res.send(req.query);
+});
+
+app.get(`${API_ROUTE}/getform`, (req, res, next) => {
+  res.render("getForm");
+});
+
+app.get(`${API_ROUTE}/postform`, (req, res, next) => {
+  res.render("postForm");
 });
 
 app.get(`${API_ROUTE}/:id`, (req, res, next) => {
