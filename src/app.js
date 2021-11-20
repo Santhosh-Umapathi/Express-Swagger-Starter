@@ -24,9 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 
 cloudinary.config({
   // cloud_name: processs.env.CLOUD_NAME
-  cloud_name: "dk92l1yoc",
-  api_key: "769888332458168",
-  api_secret: "7Kh-q81hHRdyDNiBxISrouGEFCo",
+  // cloud_name: "dk92l1yoc",
+  // api_key: "769888332458168",
+  // api_secret: "7Kh-q81hHRdyDNiBxISrouGEFCo",
 });
 
 app.use(
@@ -85,7 +85,7 @@ app.get(`${API_ROUTE}/form`, (req, res, next) => {
   res.send(req.query);
 });
 
-app.post(`${API_ROUTE}/post`, (req, res, next) => {
+app.post(`${API_ROUTE}/post`, async (req, res, next) => {
   // case - multiple images
   if (req.files) {
     for (let index = 0; index < req.files.samplefile.length; index++) {
