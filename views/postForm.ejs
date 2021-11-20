@@ -14,7 +14,7 @@
     <div class="container">
         <h1 class="display-3">POST Form</h1>
     </div>
-    <form class="px-5 w-25" method="get" action="/api/v1/form">
+    <form class="px-5 w-25" method="post" action="/api/v1/post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="text" class="form-control" name="exampleInputEmail1" id="exampleInputEmail1"
@@ -24,6 +24,10 @@
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="text" name="exampleInputPassword1" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3">
+            <label for="fileUpload" class="form-label">fileUpload</label>
+            <input type="file" name="fileUpload" multiple class="form-control" id="fileUpload">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

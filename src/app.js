@@ -1,6 +1,7 @@
 const express = require("express");
 const swaggerUi = require("swagger-ui-express");
 const fileUpload = require("express-fileupload");
+const cloudinary = require("cloudinary").v2;
 
 YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger.yaml");
@@ -21,7 +22,19 @@ const {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(fileUpload());
+cloudinary.config({
+  // cloud_name: processs.env.CLOUD_NAME
+  cloud_name: "dk92l1yoc",
+  api_key: "769888332458168",
+  api_secret: "7Kh-q81hHRdyDNiBxISrouGEFCo",
+});
+
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -70,6 +83,40 @@ app.post(`${API_ROUTE}/courseupload`, (req, res, next) => {
 app.get(`${API_ROUTE}/form`, (req, res, next) => {
   console.log("request", req.body, req.query);
   res.send(req.query);
+});
+
+app.post(`${API_ROUTE}/post`, (req, res, next) => {
+  // case - multiple images
+  if (req.files) {
+    for (let index = 0; index < req.files.samplefile.length; index++) {
+      let result = await cloudinary.uploader.upload(
+        req.files.samplefile[index].tempFilePath,
+        {
+          folder: "users",
+        }
+      );
+
+      imageArray.push({
+        public_id: result.public_id,
+        secure_url: result.secure_url,
+      });
+    }
+  }
+  // case for single image
+  // let file = req.files.samplefile;
+  // result = await cloudinary.uploader.upload(file.tempFilePath, {
+  //   folder: "users",
+  // });
+
+  let details = {
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    result,
+    imageArray,
+  };
+  console.log(details);
+
+  res.send(details);
 });
 
 app.get(`${API_ROUTE}/getform`, (req, res, next) => {
