@@ -26,4 +26,4 @@ Features included inside the project
 - File Upload, Multiple File Uploads
 - Cloudinary
 
-###### - App City @2021
+##### &copy; 2021 App City
